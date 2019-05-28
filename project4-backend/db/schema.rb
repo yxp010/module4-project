@@ -18,10 +18,9 @@ ActiveRecord::Schema.define(version: 2019_05_25_200227) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "charactors", force: :cascade do |t|
+  create_table "characters", force: :cascade do |t|
     t.string "name"
     t.string "type"
-    t.integer "action_limit"
     t.integer "experience"
     t.integer "health"
     t.integer "energy"
@@ -34,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_05_25_200227) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.integer "charactor_id"
+    t.integer "character_id"
     t.integer "building_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

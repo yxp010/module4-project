@@ -1,7 +1,7 @@
 class ResultCalculator
 
 
-    def self.calculate(charactor) 
+    def self.calculate(character) 
 
     end
 end

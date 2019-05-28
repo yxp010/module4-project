@@ -1,9 +1,8 @@
-class CreateCharactors < ActiveRecord::Migration[5.2]
+class CreateCharacters < ActiveRecord::Migration[5.2]
   def change
-    create_table :charactors do |t|
+    create_table :characters do |t|
       t.string :name
       t.string :type
-      t.integer :action_limit
       t.integer :experience
       t.integer :health
       t.integer :energy

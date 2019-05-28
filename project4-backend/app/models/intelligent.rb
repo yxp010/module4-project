@@ -1,4 +1,4 @@
-class Intelligent < Charactor
+class Intelligent < Character
 
 
     def set_attributes
