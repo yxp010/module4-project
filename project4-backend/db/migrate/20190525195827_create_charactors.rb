@@ -3,14 +3,15 @@ class CreateCharacters < ActiveRecord::Migration[5.2]
     create_table :characters do |t|
       t.string :name
       t.string :type
-      t.integer :action_limit
-      t.integer :experience
+      t.integer :gold
+      t.integer :coding_ability
       t.integer :health
       t.integer :energy
       t.integer :happiness
       t.integer :creativity
       t.integer :social
-      t.integer :laziness
+
+      
 
       t.timestamps
     end
