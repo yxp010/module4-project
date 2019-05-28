@@ -1,4 +1,4 @@
-class Lazy < Charactor 
+class Lazy < Character 
     
 
     def set_attributes

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const BASE_URL = "http://localhost:3000"
-    const CHARACTOR_URL = `${BASE_URL}/charactors`
+    const CHARACTER_URL = `${BASE_URL}/characters`
     const newChaButton = document.getElementById('create_charactor_button')
     const allChars = document.getElementById('all-chars')
 
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     allChars.addEventListener('click', (e) => {
         e.preventDefault()
         // const name = e.target[0]
-        fetch(CHARACTOR_URL)
+        fetch(CHARACTER_URL)
         .then(resp => resp.json())
         .then(obj => {
             console.log(obj)
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     newChaButton.addEventListener('click', (e) => {
         e.preventDefault()
         // const name = e.target[0]
-        fetch(CHARACTOR_URL, {
+        fetch(CHARACTER_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -1,4 +1,4 @@
-class Charactor < ApplicationRecord
+class Character < ApplicationRecord
     has_many :events
     has_many :buildings, through: :events
 

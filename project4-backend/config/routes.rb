@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  get '/charactors', to: 'charactors#index'
-  post '/charactors', to: 'charactors#create'
+  get '/characters', to: 'characters#index'
+  post '/characters', to: 'characters#create'
 end
