@@ -11,6 +11,7 @@ class CreateCharacters < ActiveRecord::Migration[5.2]
       t.integer :creativity
       t.integer :social
       t.integer :minute
+      t.integer :day
 
       
 

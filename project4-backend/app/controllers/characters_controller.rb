@@ -39,7 +39,8 @@ class CharactersController < ApplicationController
             :happiness,
             :creativity,
             :social,
-            :minute
+            :minute,
+            :day
           )
     end
 end
