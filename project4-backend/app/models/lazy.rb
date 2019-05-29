@@ -2,14 +2,13 @@ class Lazy < Character
     
 
     def set_attributes
-        self.action_limit = 3
-        self.experience = 20
-        self.health = 90
+        self.gold = 2000
+        self.coding_ability = 20
+        self.health = 50
         self.energy = 20
-        self.happiness = 20
-        self.creativity = 60
-        self.social = 10
-        self.laziness = 100
+        self.happiness = 40
+        self.creativity = 80
+        self.social = 30
     end
 end
 
