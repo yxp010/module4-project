@@ -24,6 +24,8 @@ class PopupWindow {
             case "charles' music shop":
                 this.renderCharlesMusicShop()
                 break
+            case 'bed':
+                this.renderBed()
             default:
         }
     }
@@ -86,5 +88,19 @@ class PopupWindow {
             this.popupWindow.style.display = 'none'
         })
         return leaveButton
+    }
+
+    renderBed() {
+        this.container.innerHTML = ''
+        let sleepButton = document.createElement('button')
+        let message = document.createElement('p')
+        let leaveButton = document.createElement('button')
+        sleepButton.addEventListener('click', () => {
+            message.innerText = this.building.sleep()
+        })
+        leaveButton.addEventListener('click', (e) => {
+            this.popupWindow.style.display = 'none'
+        })
+        this.container.append(sleepButton, leaveButton)
     }
 }

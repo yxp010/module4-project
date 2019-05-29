@@ -164,15 +164,6 @@ class Building {
 
     }
 
-    //
-
-
-
-
-
-
-
-
     static possibilityPool(n) {
         let pool = []
         for (let i = 0; i < n; i++) {
@@ -267,6 +258,7 @@ class Building {
         let pool = Building.possibilityPool(10)
         let num = Building.randomDraw(pool)
         this.player.gold -= 10
+        this.player.energy -= 10
         this.gameTimes += 1
         let event
         if(this.gameTimes > 2) {
@@ -294,6 +286,7 @@ class Building {
         let pool = Building.possibilityPool(10)
         let num = Building.randomDraw(pool)
         this.player.gold -= 10
+        this.player.energy -= 10
         this.gameTimes += 1
         let event
         if(this.gameTimes > 2) {
@@ -321,6 +314,7 @@ class Building {
         let event
         let pool = Building.possibilityPool(10)
         let num = Building.randomDraw(pool)
+        this.player.energy -= 30
         if(num <= 3) {
             this.player.coding_ability += 7
             event = "Vidhi:'On scale of 1 to 5, show me how do you feel about it.'"
@@ -338,6 +332,7 @@ class Building {
         let event
         let pool = Building.possibilityPool(10)
         let num = Building.randomDraw(pool)
+        this.player.energy -= 30
         if(num <= 3) {
             this.player.coding_ability += 7
             event = "Scott:'The Atten-Dancer :penguin-dance:'"
@@ -356,29 +351,77 @@ class Building {
         let pool = Building.possibilityPool(10)
         let num = Building.randomDraw(pool)
         this.player.gold -= 30
+        this.player.energy -= 20
         if(num < 3) {
             this.player.happiness += 20
             this.player.creativity += 20
             this.player.social += 30
-            event = "Scott:'The Atten-Dancer :penguin-dance:'"
+            event = {
+                'text': "WOW, nice!",
+                'video': 'https://www.youtube.com/watch?v=x6VSYAOnf5M'
+            }
         } else if(num <= 9 ) {
             this.player.happiness += 15
             this.player.creativity += 15
             this.player.social += 20
-            event = "Scott:'in the spirit of OO and DRY, I'm going to `inherit` Charles's `atten-dance-party` for today.'"
+            event = {
+                'text': "Come and dance!",
+                'video': 'https://www.youtube.com/watch?v=x6VSYAOnf5M'
+            }
         } else {
             this.player.health = 10
+            this.player.energy -= 10
             this.player.happiness += 10
             this.player.creativity += 50
             this.player.social += 50
-            event = "You hurt your ankel whi"
+            event = {
+                'text': "You learnt some new moves and enjoy dancing very much, but hurt your ankle :'",
+                'video': 'https://www.youtube.com/watch?v=x6VSYAOnf5M'
+            }
         }
         return event
     }
 
-
-    applyForJobs() {
-
+    askACigFromChris() {
+        let pool = Building.possibilityPool(10)
+        let num = Building.randomDraw(pool)
+        this.player.gold -= 10
+        let event
+        if(num <= 3) {
+            this.player.happiness += 10
+            this.player.energy += 20
+            event = 'You feel very relax!'
+        } else if(num <= 4) {
+            this.player.happiness += 30
+            this.player.energy += 40
+            event = "You took a nap at Chris' coach..." 
+        } else {
+            this.player.happiness += 15
+            this.player.energy += 5
+            this.player.gold += 10
+            event = "You feel a bit dizzy and asked refund from Chris..."
+        }
+        return event
     }
 
+    sleep() {
+        let pool = Building.possibilityPool(100)
+        let num = Building.randomDraw(pool)
+        let event
+        if(num <= 3) {
+            this.player.happiness += 0
+            this.player.energy += 0
+            event = 'You saw your body laying on the bed... Game over... sh*t happens'
+        } else if(num <= 80) {
+            this.player.happiness += 50
+            this.player.energy += 100
+            event = "Your dream('get up') comes true... " 
+        } else {
+            this.player.happiness += 20
+            this.player.energy += 50
+            this.player.coding_ability += 10
+            event = "You dreamt about coding all night..."
+        }
+        return event
+    }
 }

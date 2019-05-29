@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2019_05_25_200227) do
     t.integer "creativity"
     t.integer "social"
     t.integer "minute"
+    t.integer "day"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

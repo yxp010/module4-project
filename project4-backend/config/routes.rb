@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   get '/characters', to: 'characters#index'
   post '/characters', to: 'characters#create'
   get '/buildings', to: 'buildings#index'
+  patch '/characters/:id', to: 'characters#update'
 end
