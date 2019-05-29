@@ -15,7 +15,9 @@ class PopupWindow {
             case "wework":
                 break
             case "home":
-                this.scene.start('home')
+                console.log('home')
+                debugger
+                homeScene.start('homeScene')
             default:
         }
     }

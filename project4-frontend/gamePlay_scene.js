@@ -16,6 +16,7 @@ class GamePlayScene extends Phaser.Scene {
         this.fetchPlayerData()
         this.load.setBaseURL('http://localhost:8888/');
         this.load.image("city_map", 'assets/test_map.png');
+        this.load.image("home", 'assets/home.jpg')
         this.load.image("nathan's donutshop", 'assets/test_building.png')
         this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
     }
@@ -24,6 +25,7 @@ class GamePlayScene extends Phaser.Scene {
         this.add.image(960, 400, 'city_map');
         this.buildings = this.physics.add.staticGroup();
         this.buildings.create(200, 700, "nathan's donutshop")
+        this.buildings.create(1000, 700, "home")
         this.player = this.physics.add.sprite(500, 750, 'dude');
         this.playerStats.minute = 360
         this.player.setCollideWorldBounds(true);

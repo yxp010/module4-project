@@ -1,6 +1,6 @@
-class HomeSecene extends GamePlayScene {
+class HomeScene extends GamePlayScene {
     constructor() {
-        super('home')
+        super('homeScene')
         this.baseUrl = "http://localhost:3000"
         this.buildings
     }

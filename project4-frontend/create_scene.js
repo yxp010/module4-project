@@ -31,6 +31,7 @@ class CreateScene extends Phaser.Scene {
             e.preventDefault()
             let name = e.target[0].value
             let type = e.target[1].value
+            debugger
             fetch(`${this.baseUrl}/characters`, {
                 method: 'POST',
                 headers: {
