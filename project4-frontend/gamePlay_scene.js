@@ -79,14 +79,18 @@ class GamePlayScene extends Phaser.Scene {
             .then(collection => {
                 collection.forEach(b => {
                     if (b.name === building.texture.key) {
-                        let newBuilding = new Building(building.texture.key, this.playerStats)     
-                        let popWindow = new PopupWindow(newBuilding)
-                        popWindow.renderWindow()         
+                        if (building.texture.key === 'home') {
+                            this.scene.start('homeScene')
+                        } else {
+                            let newBuilding = new Building(building.texture.key, this.playerStats)     
+                            let popWindow = new PopupWindow(newBuilding)
+                            popWindow.renderWindow()  
+                        }
+                               
                     }
                 })
             }) 
-        }
-        
+        }   
     }
 
     changeSkyColor() {

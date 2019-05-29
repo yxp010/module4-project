@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         physics: {
             default: 'arcade',
         },
-        scene: [CreateScene, GamePlayScene, HomeSecene]
+        scene: [CreateScene, GamePlayScene, HomeScene]
     };
     let game = new Phaser.Game(config);
 
