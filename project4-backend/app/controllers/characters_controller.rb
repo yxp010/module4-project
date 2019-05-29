@@ -1,3 +1,4 @@
+
 class CharactersController < ApplicationController
         
     def index
@@ -10,6 +11,13 @@ class CharactersController < ApplicationController
         render json: @character, status: 201
     end
 
+    def update
+        
+        @character = Character.find(params[:id])
+        @character.update(character_params)
+        # render json: @character
+    end
+
     private
     def create_character
         @name = params[:name]
@@ -20,5 +28,19 @@ class CharactersController < ApplicationController
             @character = Intelligent.create(name: @name)
         end
         @character
+    end
+
+    def character_params
+        params.require(:character).permit(
+            :gold,
+            :coding_ability,
+            :health,
+            :energy,
+            :happiness,
+            :creativity,
+            :social,
+            :minute,
+            :day
+          )
     end
 end

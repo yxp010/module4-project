@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         physics: {
             default: 'arcade',
         },
-        scene: [CreateScene, GamePlayScene, HomeScene]
+        scene: [CreateScene, GamePlayScene, HomeScene, EndGame]
     };
     let game = new Phaser.Game(config);
 
@@ -21,7 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(obj => {
             console.log(obj)
         })
-    })
+    })//end allchars event listener
+
     newChaButton.addEventListener('click', (e) => {
         e.preventDefault()
         fetch(CHARACTER_URL, {
@@ -34,12 +35,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: 'piao',
                 type: 'lazy'
             })
-        })
+        })//end fetch
         .then(resp => resp.json())
         .then(obj => {
             currentPlayer = obj
         })
-    })
+    })//end newChaButton event listener
+
+ 
+
+
 
     let modal = document.getElementById("myModal");
 
