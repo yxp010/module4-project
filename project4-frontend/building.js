@@ -18,8 +18,8 @@ class Building {
         this.player.gold -= 2
         this.player.happiness += 5
         this.player.health -= 5
+        this.player.minute += 60
         return "You feel rush of happiness. Was it worth it?"
-
     }
 
 //Magic Shop Methods
