@@ -5,14 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.17.0/dist/phaser.js"></script>
+    <script src='popup_window.js'></script>
     <script src='./building.js'></script>
-    <script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
+    <script src='create_scene.js'></script>
+    <script src='gamePlay_scene.js'></script>
     <script src='./index.js'></script>
+    <link href="stylesheet.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div>
         <button id='create_character_button'>Create Character</button>
         <button id='all-chars'>ALL Character</button>
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <div id="popup-window-content">
+              </div>
+            </div>
+          
+        </div>
         <!-- <label for="name">Name:</label>
         <input type="text" required minlength="4" maxlength="8"><br>
         <input type="submit" value='Create Character'> -->

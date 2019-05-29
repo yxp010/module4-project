@@ -4,16 +4,6 @@ class Building {
         this.player = player
     }
 
-    triggerEvent() {
-        // debugger
-        switch(this.name) {
-            case 'wework':
-            this.weworkEvent()
-            case "nathan's donutshop":
-            break
-        }
-    }
-
     weworkEvent() {
         // debugger
         // alert('a')
