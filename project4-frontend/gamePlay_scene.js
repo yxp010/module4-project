@@ -16,14 +16,14 @@ class GamePlayScene extends Phaser.Scene {
         this.fetchPlayerData()
         this.load.setBaseURL('http://localhost:8888/');
         this.load.image("city_map", 'assets/test_map.png');
-        this.load.image("charles' music shop", 'assets/test_building.png')
+        this.load.image("pratikshya's dancing studio", 'assets/test_building.png')
         this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
     }
 
     create()  {       
         this.add.image(960, 400, 'city_map');
         this.buildings = this.physics.add.staticGroup();
-        this.buildings.create(200, 700, "charles' music shop")
+        this.buildings.create(200, 700, "pratikshya's dancing studio")
         this.player = this.physics.add.sprite(500, 750, 'dude');
         this.playerStats.minute = 360
         this.player.setCollideWorldBounds(true);

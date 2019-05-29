@@ -111,6 +111,7 @@ class Building {
         this.player.creativity += 10
         this.player.happiness += 3
         this.player.energy -= 10
+        return "This should have been better."
     }
 
     //Sam's club Methods
@@ -141,17 +142,22 @@ class Building {
 //tom's soccer Wagers
 
     makeRiskyBet(bet) {
-        let randomNum = Math.floor((Math.random() * 10) + 1)
-        if (randomNum <= 7) {
-            this.player.happiness -= 5
-            this.player.gold -= bet
-            return "Tom: Ouch..."
+        if (bet > this.player.gold) {
+            return "Tom: Sorry..I gotta see the money upfront."
+        } else {
+            let randomNum = Math.floor((Math.random() * 10) + 1)
+            if (randomNum <= 7) {
+                this.player.happiness -= 5
+                this.player.gold -= bet
+                return "Tom: Ouch..."
+            }
+            else {
+                this.player.gold *= 5
+                this.player.happiness += 30
+                return "Tom: Nice payout"
+            }
         }
-        else {
-            this.player.gold *= 5
-            this.player.happiness += 30
-            return "Tom: Nice payout"
-        }
+        
 
     }
 
@@ -225,10 +231,14 @@ class Building {
     }
 
     nikkiBuildComputer() {
-        this.player.gold -= 500
-        this.player.code_ability += 20
-        console.log('You got a super NickBook for your coding!')
-        let event = 'You got a super NickBook for your coding!'
+        let event
+        if (this.player.gold < 500) {
+            event = "Nikki: Sorry, this is not a charity!"
+        } else {
+            this.player.gold -= 500
+            this.player.code_ability += 20
+            event = 'Nikki: You got a super NickBook for your coding!'
+        }
         return event
     }
 
@@ -242,22 +252,18 @@ class Building {
                 this.player.health -= 10
                 this.player.happiness = 0
                 event = 'You are scratched by a dog hair :('
-                console.log(event)
             } else {
                 this.player.happiness += 30
                 event = 'You kissed by a corgi'
-                console.log(event)
             }
         } else {
             if (num <= 1) {
                 this.player.happiness = 100
                 event = "You are the King of Corgi!"
-                console.log(event)
             } else if(num > 1 && num <= 9) {
                 this.player.happiness += 20
                 this.player.gold += 50
                 event = 'Corgi makes your day!'
-                console.log(event)
             }
         }
         return event
@@ -356,22 +362,33 @@ class Building {
         let pool = Building.possibilityPool(10)
         let num = Building.randomDraw(pool)
         this.player.gold -= 30
+        this.player.energy -= 20
         if(num < 3) {
             this.player.happiness += 20
             this.player.creativity += 20
             this.player.social += 30
-            event = "Scott:'The Atten-Dancer :penguin-dance:'"
+            event = {
+                'text': "WOW, nice!",
+                'video': 'https://www.youtube.com/watch?v=x6VSYAOnf5M'
+            }
         } else if(num <= 9 ) {
             this.player.happiness += 15
             this.player.creativity += 15
             this.player.social += 20
-            event = "Scott:'in the spirit of OO and DRY, I'm going to `inherit` Charles's `atten-dance-party` for today.'"
+            event = {
+                'text': "Come and dance!",
+                'video': 'https://www.youtube.com/watch?v=x6VSYAOnf5M'
+            }
         } else {
             this.player.health = 10
+            this.player.energy -= 10
             this.player.happiness += 10
             this.player.creativity += 50
             this.player.social += 50
-            event = "You hurt your ankel whi"
+            event = {
+                'text': "You learnt some new moves and enjoy dancing very much, but hurt your ankle :'",
+                'video': 'https://www.youtube.com/watch?v=x6VSYAOnf5M'
+            }
         }
         return event
     }
