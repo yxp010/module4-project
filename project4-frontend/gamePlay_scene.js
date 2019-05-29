@@ -9,9 +9,11 @@ class GamePlayScene extends Phaser.Scene {
         this.counter = 0
         this.day = new Phaser.Display.Color(48, 165, 255);
         this.night = new Phaser.Display.Color(6, 22, 43);
+        this.playerStats = {}
     }
 
     preload() {
+        this.fetchPlayerData()
         this.load.setBaseURL('http://localhost:8888/');
         this.load.image("city_map", 'assets/test_map.png');
         this.load.image("nathan's donutshop", 'assets/test_building.png')
@@ -23,7 +25,7 @@ class GamePlayScene extends Phaser.Scene {
         this.buildings = this.physics.add.staticGroup();
         this.buildings.create(200, 700, "nathan's donutshop")
         this.player = this.physics.add.sprite(500, 750, 'dude');
-        this.player.minute = 0
+        this.playerStats.minute = 360
         this.player.setCollideWorldBounds(true);
         this.anims.create({
             key: 'left',
@@ -75,7 +77,7 @@ class GamePlayScene extends Phaser.Scene {
             .then(collection => {
                 collection.forEach(b => {
                     if (b.name === building.texture.key) {
-                        let newBuilding = new Building(building.texture.key, player)     
+                        let newBuilding = new Building(building.texture.key, this.playerStats)     
                         let popWindow = new PopupWindow(newBuilding)
                         popWindow.renderWindow()         
                     }
@@ -88,30 +90,38 @@ class GamePlayScene extends Phaser.Scene {
     changeSkyColor() {
         this.counter += 1
         if (this.counter % 3600 == 0) {
-            this.player.minute += 1
+            this.playerStats.minute += 1
         }
-        if (this.player.minute > 1440) {
-            this.player.minute = this.player.minute - 1440
+        if (this.playerStats.minute > 1440) {
+            this.playerStats.minute = this.playerStats.minute - 1440
         }
         let hexColor 
 
         // from 8:30 p.m. to 6 a.m. is 'Night' color background
-        if (this.player.minute > 1230 || this.player.minute <= 360) {
+        if (this.playerStats.minute > 1230 || this.playerStats.minute <= 360) {
             this.cameras.main.setBackgroundColor(this.night)
         } 
         // from 6 a.m to 7 a.m. is sun rise  
-          else if (this.player.minute > 360 && this.player.minute <= 420) {
-            hexColor = Phaser.Display.Color.Interpolate.ColorWithColor(this.night, this.day, 60, this.player.minute - 360)
+          else if (this.playerStats.minute > 360 && this.playerStats.minute <= 420) {
+            hexColor = Phaser.Display.Color.Interpolate.ColorWithColor(this.night, this.day, 60, this.playerStats.minute - 360)
             this.cameras.main.setBackgroundColor(hexColor)
         } 
         // from 7 a.m to 7:30 p.m. is 'Day' color background
-          else if (this.player.minute > 420 && this.player.minute <= 1170) {
+          else if (this.playerStats.minute > 420 && this.playerStats.minute <= 1170) {
             this.cameras.main.setBackgroundColor(this.day)
         } 
         // from 7:30 p.m to 8:30 p.m. is sun set
-          else if (this.player.minute > 1170 && this.player.minute <= 1230) {
-            hexColor = Phaser.Display.Color.Interpolate.ColorWithColor(this.day, this.night, 60, this.player.minute - 1170)
+          else if (this.playerStats.minute > 1170 && this.playerStats.minute <= 1230) {
+            hexColor = Phaser.Display.Color.Interpolate.ColorWithColor(this.day, this.night, 60, this.playerStats.minute - 1170)
             this.cameras.main.setBackgroundColor(hexColor)
         }
+    }
+
+    fetchPlayerData() {
+        fetch(this.baseUrl + '/characters')
+        .then(res => res.json())
+        .then(obj => {
+            this.playerStats = obj[obj.length-1]
+        })
     }
 }
