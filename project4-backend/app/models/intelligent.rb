@@ -2,13 +2,13 @@ class Intelligent < Character
 
 
     def set_attributes
-        self.action_limit = 6
-        self.experience = 30
-        self.health = 40
+        self.gold = 2000
+        self.coding_ability = 40
+        self.health = 50
         self.energy = 40
-        self.happiness = 50
-        self.creativity = 60
+        self.happiness = 30
+        self.creativity = 40
         self.social = 20
-        self.laziness = 80
+       
     end
 end
