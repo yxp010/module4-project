@@ -3,4 +3,16 @@ class EndGame extends Phaser.Scene {
         super("endGame")
         this.baseUrl = "http://localhost:3000"
     }
+
+    preload() {
+
+    }
+
+    create() {
+
+    }
+
+    update() {
+        
+    }
 }

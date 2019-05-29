@@ -10,6 +10,10 @@ class CharactersController < ApplicationController
         render json: @character, status: 201
     end
 
+    def update
+        
+    end
+
     private
     def create_character
         @name = params[:name]
