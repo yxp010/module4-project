@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    let currentPlayer
     let eventTriggerTimes = 0
     let cursors
     let player
@@ -29,16 +30,16 @@ document.addEventListener('DOMContentLoaded', () => {
         this.load.setBaseURL('http://localhost:8888/');
 
         this.load.image("city_map", 'assets/test_map.png');
-        this.load.image("wework", 'assets/test_building.png')
+        this.load.image("Ryan's Laboratory", 'assets/test_building.png')
         this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
     }
 
     function create ()
     {
         this.add.image(960, 540, 'city_map');
-        // this.add.image(200, 580, 'building1')
         buildings = this.physics.add.staticGroup();
-        buildings.create(200, 700, 'wework')
+        buildings.create(200, 700, "Ryan's Laboratory")
+        // buildings.create(800, 799, 'wework')
         player = this.physics.add.sprite(500, 750, 'dude');
         player.setCollideWorldBounds(true);
         this.anims.create({
@@ -92,6 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 type: 'lazy'
             })
         })
+        .then(resp => resp.json())
+        .then(obj => {
+            currentPlayer = obj
+        })
     })
 
     function update() {
@@ -126,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // debugger
                     if (b.name === building.texture.key) {
                         // debugger
-                        let newBuilding = new Building(building.texture.key, player)          
+                        let newBuilding = new Building(building.texture.key, currentPlayer)          
                         newBuilding.triggerEvent()         
                         return
                     }
