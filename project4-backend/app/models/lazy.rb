@@ -2,7 +2,6 @@ class Lazy < Character
     
 
     def set_attributes
-
         self.gold = 2000
         self.coding_ability = 20
         self.health = 50

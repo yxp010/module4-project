@@ -35,6 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 type: 'lazy'
             })
         })
+        .then(resp => resp.json())
+        .then(obj => {
+            currentPlayer = obj
+        })
     })
 
     let modal = document.getElementById("myModal");

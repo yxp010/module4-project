@@ -9,5 +9,6 @@ class Intelligent < Character
         self.happiness = 30
         self.creativity = 40
         self.social = 20
+       
     end
 end

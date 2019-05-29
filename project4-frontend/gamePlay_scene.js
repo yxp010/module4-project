@@ -23,7 +23,7 @@ class GamePlayScene extends Phaser.Scene {
         this.buildings = this.physics.add.staticGroup();
         this.buildings.create(200, 700, "nathan's donutshop")
         this.player = this.physics.add.sprite(500, 750, 'dude');
-        this.player.minute = 800
+        this.player.minute = 0
         this.player.setCollideWorldBounds(true);
         this.anims.create({
             key: 'left',
@@ -87,7 +87,7 @@ class GamePlayScene extends Phaser.Scene {
 
     changeSkyColor() {
         this.counter += 1
-        if (this.counter % 360 == 0) {
+        if (this.counter % 3600 == 0) {
             this.player.minute += 1
         }
         if (this.player.minute > 1440) {
