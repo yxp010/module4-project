@@ -27,21 +27,23 @@ class EndGame extends Phaser.Scene {
     }
 
 
+
     create() {
         // this.add.image(700, 600, 'background');
         // this.bg = this.add.tileSprite(0,0, innerWidth, window.innerHeight, "background")
         let result = new Result(this.playerStats)
 
-        let text = result.calculate()
-        
+        let text = result.calculate() 
+        text += '\n'
+        text += result.summarize()
 
-        this.testText = this.add.text(32, 1090, text, {
+        this.testText = this.add.text(32, 780, text, {
             wordWrap: {
                 width: 510
             }
         })
 
-        this.endText = this.add.text(250, 1090 + this.testText.height + 540, "End", {
+        this.endText = this.add.text(250, 780 + this.testText.height + 384, "End", {
             align: 'center',
             fontSize: '64px'
 
@@ -88,7 +90,7 @@ class EndGame extends Phaser.Scene {
         this.player.anims.play('right', true);
 
 
-        if (this.endText.y != 540) {
+        if (this.endText.y != 384) {
             this.testText.y -= 1
             this.endText.y -= 1
         }

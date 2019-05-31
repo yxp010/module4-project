@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             width: 1024,
             height: 768,
         },
-        scene: [CreateScene, GamePlayScene, HomeScene, EndGame]
+        scene: [CreateScene, GamePlayScene, GamePlayScene2, HomeScene, EndGame]
     };
     let game = new Phaser.Game(config);
     game.scale.pageAlignHorizontally = true;

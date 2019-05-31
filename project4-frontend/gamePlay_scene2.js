@@ -1,7 +1,7 @@
-class GamePlayScene extends Phaser.Scene {
+class GamePlayScene2 extends Phaser.Scene {
 
     constructor() {
-        super("playGame")
+        super("playGame2")
         this.baseUrl = "http://localhost:3000"
         this.eventTriggerTimes = 0
         this.cursors
@@ -15,120 +15,14 @@ class GamePlayScene extends Phaser.Scene {
         this.eventsType = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19']
     }
 
-    hasEvents() {
-        let hasAEvent
-        this.allEvents.eventsType.forEach(eventType => {
-            if (this.allEvents.events.hasOwnProperty(eventType)) {
-                hasAEvent = true
-            }
-        }) 
-        return !!hasAEvent
-    }
-
-    saveButtonEvent() {
-        this.saveButton.addEventListener('click', (e) => {
-            e.preventDefault()
-            this.allEvents = this.playerStats.events
-            delete this.playerStats.events
-            debugger
-            fetch(this.baseUrl + `/characters/${this.playerStats.id}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(this.playerStats)
-            })//end fetch
-
-            if (this.hasEvents) {
-
-                for (const eventType in this.allEvents) {
-                    for (let i = 0; i < this.allEvents[eventType]; i++) {
-                        fetch(this.baseUrl + '/event_characters', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Accept': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                event_id: parseInt(eventType),
-                                character_id: this.playerStats.id
-                            })
-                        })
-                        .then(() => {
-                            if ((this.allEvents[eventType] - 1) == 0) {
-                                delete this.allEvents[eventType]
-                            } else {
-                                this.allEvents[eventType] -= 1
-                            }
-                        })
-                      }
-                }
-            }
-        })
-    }
-
-    preload() {
-        this.fetchPlayerData()
-        this.load.setBaseURL('http://localhost:8888/');
-        // roads
-        this.load.image("road", 'assets/map_blocks/road.png')
-        // this.load.image("upLeftRoad", 'assets/map_blocks/top_left_road.png')
-        // this.load.image("upRightRoad", 'assets/map_blocks/top_right_road.png')
-        // this.load.image("downroad", 'assets/downroad.png')
-        // background
-        this.load.image("background", 'assets/end_bg.jpg')
-
-        //sky 
-        this.load.image("sun", 'assets/map_blocks/sun_2.png')
-        this.load.image("moon", 'assets/map_blocks/moon.png')
-
-        // home
-        this.load.image("home", 'assets/home.jpg')
-        this.load.image("empty_room", 'assets/empty_room.png');
-        this.load.image('singleBed', 'assets/bed.jpeg')
-
-        // buildings
-        this.load.image("charles' music shop", 'assets/buildings/charles_music.png')
-        this.load.image("ryan's lab", 'assets/buildings/ryan_lab.png')
-        this.load.image("nathan's donutshop", 'assets/buildings/nathan_donut.png')
-        this.load.image("chris' vape shop", 'assets/buildings/chris_vape.png')
-        this.load.image("justin's gym", 'assets/buildings/justin_gym.png')
-        this.load.image("kevin_luis_game", 'assets/buildings/kevin_luis_game.png')
-        this.load.image("minh's magic shop", 'assets/buildings/minh_magic.png')
-        this.load.image("niki's computer shop", 'assets/buildings/nick_computer.png')
-        this.load.image("pratikshya's dancing studio", 'assets/buildings/pratikshya_dance.png')
-        this.load.image("ryan's lab", 'assets/buildings/ryan_lab.png')
-        this.load.image("sam's club", 'assets/buildings/sam_club.png')
-        this.load.image("tom's soccer wagers", 'assets/buildings/tom_gamble.png')
-
-        // map
-        this.load.image("city_map", 'assets/city_map.png');
-
-        //character
-        
-        this.load.path = 'assets/'
-        this.load.image("city_map", 'test_map.png');
-        this.load.image('wework1', 'wework1.png')
-        this.load.image('wework2', 'wework2.png')
-        this.load.image('wework3', 'wework3.png')
-        this.load.image("nathan's donutshop", 'test_building.png')
-        this.load.spritesheet('dude', 'dude.png', {
-            frameWidth: 32,
-            frameHeight: 64
-        });
-
-
-    }
-
     create() {
         this.add.image(512, 433, 'city_map');
 
         
         // roads
         this.blocks = this.physics.add.staticGroup();
-        this.blocks.create(512, 430, 'road')
-        // this.blocks.create(900, 345, 'upRightRoad')
+        this.blocks.create(245, 345, 'upLeftRoad')
+        this.blocks.create(900, 345, 'upRightRoad')
 
         // sky
         this.sun = this.blocks.create(0, 100, 'sun')
@@ -141,12 +35,12 @@ class GamePlayScene extends Phaser.Scene {
         // this.blocks.create(512, 433, 'downroad')
         //buildings
         this.buildings = this.physics.add.staticGroup();
-        this.buildings.create(380, 475, "nathan's donutshop")
-        this.buildings.create(120, 525, "charles' music shop")
-        this.buildings.create(650, 510, "sam's club")
+        this.buildings.create(600, 358, "nathan's donutshop")
+        this.buildings.create(120, 402, "charles' music shop")
+        this.buildings.create(908, 392, "sam's club")
 
         // character
-        this.player = this.physics.add.sprite(50, 740, 'dude');
+        this.player = this.physics.add.sprite(750, 300, 'dude');
         this.playerStats.minute = 450
         this.player.setCollideWorldBounds(true);
         this.anims.create({
@@ -214,6 +108,7 @@ class GamePlayScene extends Phaser.Scene {
         this.physics.add.collider(this.player, this.buildings, this.triggerEvent, null, this);
         this.saveButtonEvent()
     }
+
 
     update() {
         this.changeSkyColor()
@@ -369,5 +264,4 @@ class GamePlayScene extends Phaser.Scene {
         psDiv.append(playerStats1, playerStats2)
         document.body.append(psDiv)
     }
-
 }

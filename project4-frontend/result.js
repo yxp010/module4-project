@@ -20,7 +20,6 @@ class Result {
         total += this.player.social
 
         return this.returnResultString(total)
-        
     }
 
     summarize() {
@@ -30,7 +29,13 @@ class Result {
             events.forEach(event => {
                 this.classifyEvent(event)
             });
-            this.produceResult() //Array
+            debugger
+            let result = ''
+            this.produceResult().forEach((sentence => {
+                sentence += '/n'
+                result += sentence
+            }))
+            return result
         })
     }
 
