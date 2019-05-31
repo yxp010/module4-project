@@ -7,7 +7,7 @@ class HomeScene extends Phaser.Scene {
     }
 
     create() {
-        this.add.image(960, 400, 'empty_room');
+        this.add.image(512, 384, 'empty_room');
         this.buildings = this.physics.add.staticGroup();
         this.buildings.create(200, 700, "singleBed")
         // this.buildings.create(1000, 700, "home")

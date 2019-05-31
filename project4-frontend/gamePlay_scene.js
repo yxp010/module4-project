@@ -105,10 +105,19 @@ class GamePlayScene extends Phaser.Scene {
         this.load.image("city_map", 'assets/city_map.png');
 
         //character
-        this.load.spritesheet('dude', 'assets/dude.png', {
+        
+        this.load.path = 'assets/'
+        this.load.image("city_map", 'test_map.png');
+        this.load.image('wework1', 'wework1.png')
+        this.load.image('wework2', 'wework2.png')
+        this.load.image('wework3', 'wework3.png')
+        this.load.image("nathan's donutshop", 'test_building.png')
+        this.load.spritesheet('dude', 'dude.png', {
             frameWidth: 32,
-            frameHeight: 48
+            frameHeight: 64
         });
+
+
     }
 
     create() {
@@ -140,10 +149,42 @@ class GamePlayScene extends Phaser.Scene {
         this.playerStats.minute = 450
         this.player.setCollideWorldBounds(true);
         this.anims.create({
+            key: 'wemove',
+            frames: [
+                { key: 'wework1' },
+                { key: 'wework2' },
+                { key: 'wework3', duration: 50 }
+            ],
+            frameRate: 7,
+            repeat: -1 
+        })
+
+        this.add.sprite(1000, 700, 'wework1').play('wemove');
+
+        this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('dude', {
+                start: 9,
+                end: 17
+            }),
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'up',
+            frames: this.anims.generateFrameNumbers('dude', {
                 start: 0,
-                end: 3
+                end: 8
+            }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'down',
+            frames: this.anims.generateFrameNumbers('dude', {
+                start: 27,
+                end: 35
             }),
             frameRate: 10,
             repeat: -1
@@ -153,7 +194,7 @@ class GamePlayScene extends Phaser.Scene {
             key: 'turn',
             frames: [{
                 key: 'dude',
-                frame: 4
+                frame: 0
             }],
             frameRate: 20
         });
@@ -161,8 +202,8 @@ class GamePlayScene extends Phaser.Scene {
         this.anims.create({
             key: 'right',
             frames: this.anims.generateFrameNumbers('dude', {
-                start: 5,
-                end: 8
+                start: 18,
+                end: 26
             }),
             frameRate: 10,
             repeat: -1
@@ -183,8 +224,17 @@ class GamePlayScene extends Phaser.Scene {
             this.player.setVelocityX(160);
             this.eventTriggerTimes = 0
             this.player.anims.play('right', true);
+        } else if (this.cursors.up.isDown) {
+            this.player.setVelocityY(-160);
+            this.eventTriggerTimes = 0
+            this.player.anims.play('up', true);
+        } else if (this.cursors.down.isDown) {
+            this.player.setVelocityY(160);
+            this.eventTriggerTimes = 0
+            this.player.anims.play('down', true);
         } else {
             this.player.setVelocityX(0);
+            this.player.setVelocityY(0);
             this.player.anims.play('turn');
         }
 
@@ -243,15 +293,24 @@ class GamePlayScene extends Phaser.Scene {
                 this.scene.start("endGame")   
             }
         }
+        let tsDiv = document.getElementById('timeStats')
+        tsDiv.innerHTML = ""
+        let p = document.createElement('p')
+        p.innerText = `Day: ${this.playerStats.day}  Time: ${Math.floor(this.playerStats.minute/60)}:${Math.round((this.playerStats.minute/60-Math.floor(this.playerStats.minute/60))*60)}`
+        tsDiv.append(p)
+        document.body.append(tsDiv)
     }
 
+    
     fetchPlayerData() {
         fetch(this.baseUrl + '/characters')
-            .then(res => res.json())
-            .then(obj => {
-                this.playerStats = obj[obj.length - 1]
-            })
+        .then(res => res.json())
+        .then(obj => {
+            let player = this.playerStats = obj[obj.length - 1]
+            this.showPlayerStats(player)
+        })
     }
+
 
     setSky(minute) {
         let hexColor
@@ -293,6 +352,21 @@ class GamePlayScene extends Phaser.Scene {
                 this.moon.x = this.moon.orginalX + (1024 + this.moon.width) / (1440 - 1200 + 360) * (240 + minute)
             }
         }
+    }
+    
+
+    showPlayerStats(player) {   
+        let psDiv = document.getElementById('playerStats')
+        psDiv.innerHTML = ""
+        // debugger
+        let playerStats1 = document.createElement('p')
+        let playerStats2 = document.createElement('p')
+
+        playerStats1.innerText = `Gold: ${player.gold}  Energy: ${player.energy}  Health: ${player.health}  Coding Ability: ${player.coding_ability}`
+        console.log(`${player.minute}`)
+        playerStats2.innerText = `Happiness: ${player.happiness} Creativity: ${player.creativity}  Social: ${player.social}  `
+        psDiv.append(playerStats1, playerStats2)
+        document.body.append(psDiv)
     }
 
 }

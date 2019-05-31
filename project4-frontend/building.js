@@ -29,9 +29,11 @@ class Building {
         this.player.gold -= 2
         this.player.happiness += 5
         this.player.health -= 5
+        
         this.player.timeSpent += 180
-
-        return "You feel a rush of happiness. Was it worth it?"
+        this.player.minute += 60
+        this.showPlayerStats(this.player)
+        return "You feel rush of happiness. Was it worth it?"
     }
 
 //Magic Shop Methods
@@ -43,16 +45,19 @@ class Building {
         if (randomNum <= 5) {
             this.player.happiness --
             this.player.gold ++
+            this.showPlayerStats(this.player)
             return "Not bad. I'm sure the next pack will be better!"
         }
         else if (randomNum > 5 && randomNum <=8) {
             this.player.happiness += 2
             this.player.gold += 3
+            this.showPlayerStats(this.player)
             return "Hey that's a pretty good card! Now you have enough to buy another pack!"
         }
         else {
             this.player.happiness += 5
             this.player.gold += 6
+            this.showPlayerStats(this.player)
             return "Woah! A mythic rare! I think you're ready to buy a box!"
         }
     }
@@ -64,16 +69,19 @@ class Building {
         if (randomNum <= 5) {
             this.player.happiness += 5
             this.player.gold += 50
+            this.showPlayerStats(this.player)
             return "Minh: Hmm, unlucky. Might want to try a different box."
         }
         else if (randomNum > 5 && randomNum <=8) {
             this.player.happiness += 10
             this.player.gold += 100
+            this.showPlayerStats(this.player)
             return "Minh: Can't go wrong with buying in bulk"
         }
         else {
             this.player.happiness += 20
             this.player.gold += 250
+            this.showPlayerStats(this.player)
             return "Minh: I told you those boxes are worth the investment"
         }
 
@@ -90,22 +98,26 @@ class Building {
                 this.player.health -= 40;
                 this.player.happiness -= 40;
                 this.player.social -= 20;
+                this.showPlayerStats(this.player)
                 return "Ryan: Hmm... Not what I thought would happen there... It seems the experiment has left you horribly disfigured."
             case 2:
                 this.player.creativity +=40
                 this.player.social +=40
                 this.player.coding_ability -= 30
+                this.showPlayerStats(this.player)
                 return "Ryan: Well, half of the experiment was a success!"
 
             case 3: 
                 this.player.creativity -= 40
                 this.player.social -= 40
                 this.player.coding_ability += 30
+                this.showPlayerStats(this.player)
                 return "Ryan: A small price to pay for greatness!"
             case 4: 
                 this.player.health =+20
                 this.player.energy +=50
                 this.player.happiness += 20
+                this.showPlayerStats(this.player)
                 return "Ryan: Wow. Honestly I'm suprised that went as well as it did."
             case 5:
                 this.player.creativity += 5
@@ -114,6 +126,7 @@ class Building {
                 this.player.coding_ability += 5
                 this.player.health += 5
                 this.player.energy += 5
+                this.showPlayerStats(this.player)
                 return "Ryan: I've made some minor improvements."
         }
     }
@@ -126,7 +139,7 @@ class Building {
         this.player.creativity += 10
         this.player.happiness += 3
         this.player.energy -= 10
-        return "This should have been better."
+        this.showPlayerStats(this.player)
     }
 
     //Sam's club Methods
@@ -138,6 +151,7 @@ class Building {
         this.player.social += 10
         this.player.happiness += 10
         this.player.energy -= 20
+        this.showPlayerStats(this.player)
         return "You're not sure how, but 3 hours have past. You check your phone and find a strange phone number. Text?"
     }
 
@@ -148,10 +162,12 @@ class Building {
 
         if (successChance >= 1) {
             this.player.happiness +=10
+            this.showPlayerStats(this.player)
             return "You made a new friend"
         }
         else {
             this.player.happiness -= 10
+            this.showPlayerStats(this.player)
             return "You got ghosted...it might not even be a real number"
         }
     }
@@ -237,6 +253,7 @@ class Building {
             event = 'You had fun with Justin!'
             console.log(event)
         }
+        this.showPlayerStats(this.player)
         return event
     }
 
@@ -278,6 +295,7 @@ class Building {
                 event = 'Corgi makes your day!'
             }
         }
+        this.showPlayerStats(this.player)
         return event
     }
 
@@ -307,6 +325,7 @@ class Building {
             this.player.creativity += 15
             event = 'You caught a Vaporeon!'
         }
+        this.showPlayerStats(this.player)
         return event
     }
 
@@ -336,6 +355,7 @@ class Building {
             this.player.creativity += 15
             event = "Kevin:'Good Game!'"
         }
+        this.showPlayerStats(this.player)
         return event
     }
 
@@ -355,6 +375,7 @@ class Building {
             this.player.coding_ability += 5
             event = "Vidhi:'Oh sh*t! I just deleted it...'"
         }
+        this.showPlayerStats(this.player)
         return event
     }
 
@@ -374,6 +395,7 @@ class Building {
             this.player.coding_ability += 5
             event = "Scott:'Attendance!!!'"
         }
+        this.showPlayerStats(this.player)
         return event
     }
 
@@ -411,6 +433,7 @@ class Building {
                 'video': 'https://www.youtube.com/watch?v=x6VSYAOnf5M'
             }
         }
+        this.showPlayerStats(this.player)
         return event
     }
 
@@ -434,6 +457,7 @@ class Building {
             this.player.gold += 10
             event = "You feel a bit dizzy and asked refund from Chris..."
         }
+        this.showPlayerStats(this.player)
         return event
     }
 
@@ -456,6 +480,21 @@ class Building {
             this.player.coding_ability += 10
             event = "You dreamt about coding all night..."
         }
+        this.showPlayerStats(this.player)
         return event
+    }
+
+    showPlayerStats(player) {   
+        let psDiv = document.getElementById('playerStats')
+        psDiv.innerHTML = ""
+        // debugger
+        let playerStats1 = document.createElement('p')
+        let playerStats2 = document.createElement('p')
+
+        playerStats1.innerText = `Gold: ${player.gold}  Energy: ${player.energy}  Health: ${player.health}  Coding Ability: ${player.coding_ability}`
+        console.log(`${player.minute}`)
+        playerStats2.innerText = `Happiness: ${player.happiness} Creativity: ${player.creativity}  Social: ${player.social}`
+        psDiv.append(playerStats1, playerStats2)
+        document.body.append(psDiv)
     }
 }
