@@ -6,6 +6,11 @@ class CharactersController < ApplicationController
         render json: @characters
     end
 
+    def show
+        @character = Character.find(params[:id])
+        render json: @character
+    end
+
     def create 
         @character = create_character
         render json: @character, status: 201
@@ -15,6 +20,12 @@ class CharactersController < ApplicationController
         @character = Character.find(params[:id])
         @character.update(character_params)
         # render json: @character
+    end
+
+    def all_events
+        @character = Character.find(params[:id])
+        @events = @character.event_characters
+        render json: @events
     end
 
     private

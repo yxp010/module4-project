@@ -5,15 +5,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const allChars = document.getElementById('all-chars')
     var config = {
         type: Phaser.AUTO,
-        width: 1920,
-        height: 1080,
+        // width:800,
+        // height: 600,
         physics: {
             default: 'arcade',
+        },
+        scale: {
+            autoCenter: Phaser.Scale.CENTER_BOTH,
+            width: 1024,
+            height: 768,
         },
         scene: [CreateScene, GamePlayScene, HomeScene, EndGame]
     };
     let game = new Phaser.Game(config);
-
+    game.scale.pageAlignHorizontally = true;
+    game.scale.pageAlignVertically = true;
+    game.scale.refresh();
     allChars.addEventListener('click', (e) => {
         e.preventDefault()
         fetch(CHARACTER_URL)
@@ -42,10 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     })//end newChaButton event listener
 
- 
-
-
-
     let modal = document.getElementById("myModal");
 
     let span = document.getElementsByClassName("close")[0];
@@ -53,4 +56,5 @@ document.addEventListener('DOMContentLoaded', () => {
     span.onclick = function() {
     modal.style.display = "none";
     }
+    
 })

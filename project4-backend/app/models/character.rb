@@ -1,6 +1,6 @@
 class Character < ApplicationRecord
-    has_many :events
-    has_many :buildings, through: :events
+    has_many :event_characters
+    has_many :events, through: :event_characters
 
     after_initialize :set_attributes, if: :new_record?
 

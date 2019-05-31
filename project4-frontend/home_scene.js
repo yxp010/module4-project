@@ -6,15 +6,6 @@ class HomeScene extends Phaser.Scene {
         this.playerStats = {}
     }
 
-    preload() {
-        this.fetchPlayerData()
-        this.load.setBaseURL('http://localhost:8888/');
-        this.load.image("empty_room", 'assets/empty_room.jpg');
-        this.load.image('singleBed', 'assets/bed.jpeg')
-        this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
-        // super.preload()
-    }
-
     create() {
         this.add.image(960, 400, 'empty_room');
         this.buildings = this.physics.add.staticGroup();
@@ -71,7 +62,7 @@ class HomeScene extends Phaser.Scene {
             .then(resp => resp.json())
             .then(collection => {
                 collection.forEach(b => {
-                    if (b.name == 'singlebed') {
+                    if (b.name == 'singleBed') {
                         let newBuilding = new Building(b.name, this.playerStats)     
                         let popWindow = new PopupWindow(newBuilding)
                         popWindow.renderWindow()

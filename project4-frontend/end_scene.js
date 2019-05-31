@@ -7,19 +7,6 @@ class EndGame extends Phaser.Scene {
         
     }
 
-
-    preload() {
-        
-        this.fetchPlayerData()
-        this.load.setBaseURL('http://localhost:8888/')
-        this.load.image("background", 'assets/end_bg.jpg')
-        this.load.spritesheet('dude', 'assets/dude.png', {
-            frameWidth: 32,
-            frameHeight: 48
-        });
-        
-    }
-
     create() {
         this.add.image(960, 400, 'background');
         this.player = this.physics.add.sprite(500, 750, 'dude');
@@ -56,7 +43,7 @@ class EndGame extends Phaser.Scene {
     }
 
     update() {
-
+        
     }
 
     fetchPlayerData() {

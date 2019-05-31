@@ -1,4 +1,6 @@
 class Event < ApplicationRecord
-    belongs_to :character
-    belongs_to :building
+
+    has_many :event_characters
+    has_many :characters, through: :event_characters 
+
 end

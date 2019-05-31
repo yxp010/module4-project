@@ -8,7 +8,7 @@
 Building.create(name: "wework")
 
 ##shops
-Building.create(name: "nathan's donutshop")
+Building.create(name: "nathan's donutshop") 
 Building.create(name: "ryan's lab")
 Building.create(name: "minh's magic shop")
 Building.create(name: "charles' music shop")
@@ -17,14 +17,18 @@ Building.create(name: "sam's club")
 Building.create(name: "justin's gym")
 Building.create(name: "niki's computer shop")
 Building.create(name: "shawn's pets store")
-Building.create(name: "luis pokemon")
-Building.create(name: "kevin fifa")
+Building.create(name: "kevin_luis_game")
 Building.create(name: "vidhi's lesson")
 Building.create(name: "scott's lesson")
 Building.create(name: "pratikshya's dancing studio")
+Building.create(name: "chris' vape shop")
 
 ## home
 Building.create(name: "home")
-Building.create(name: "bed")
+Building.create(name: "singleBed")
 #####
 
+19.times do 
+    # Event.create(event_type: "#{index}")
+    Event.create()
+end

@@ -14,6 +14,7 @@ class PopupWindow {
                 this.renderDonutShop()
                 break
             case "wework":
+                this.renderWework()
                 break
             case "minh's magic shop":
                 this.renderMagicShop()
@@ -24,8 +25,9 @@ class PopupWindow {
             case "charles' music shop":
                 this.renderCharlesMusicShop()
                 break
-            case 'bed':
+            case 'singleBed':
                 this.renderBed()
+                break
             case "sam's club":
                 this.renderSamsClub()
                 break
@@ -41,20 +43,14 @@ class PopupWindow {
             case "shawn's pets store":
                 this.renderShawnPetStore()
                 break
-            case "luis pokemon":
-                this.renderLuisPokemon()
-                break
-            case "kevin fifa":
-                this.renderKevinFifa()
-                break
-            case "vidhi's lesson":
-                this.renderVidhiLesson()
-                break
-            case "scott's lesson":
-                this.renderScottAttendance()
+            case "kevin_luis_game":
+                this.renderKevinLuisGame()
                 break
             case "pratikshya's dancing studio":
                 this.renderPratikshyaStudio()
+                break
+            case "chris' vape shop":
+                this.askACigFromChris()
                 break
             default:
         }
@@ -62,7 +58,19 @@ class PopupWindow {
     
     // We work
     renderWework() {
-
+        let message = document.createElement('p')
+        message.innerText = "Vidhi and Scott: Welcome to flatiron."
+        let button1 = document.createElement('button')
+        button1.innerText = "Take the lesson with Vidhi"
+        button1.addEventListener('click', () => {
+            message.innerText = this.building.learnSEWVidhi()
+        })
+        let button2 = document.createElement('button')
+        button2.innerText = "Do attendance"
+        button2.addEventListener('click', () => {
+            message.innerText = this.building.learnAttendanceWScott()
+        })
+        this.container.append(message, button1, button2, this.leaveButton())
     }
 
     // Donut Shop
@@ -191,53 +199,21 @@ class PopupWindow {
         this.container.append(message, button, this.leaveButton())
     }
 
-    // Luis Pokemon
-    renderLuisPokemon() {
-        let message = document.createElement('p')
-        message.innerText = "Luis: let's paly pokemon."
-        let button = document.createElement('button')
-        button.innerText = "Play pokemon"
-        button.addEventListener('click', () => {
-            message.innerText = this.building.playPokemonWLuis()
-        })
-        this.container.append(message, button, this.leaveButton())
-    }
-
     // Kevin Fifa 
-    renderKevinFifa() {
+    renderKevinLuisGame() {
         let message = document.createElement('p')
-        message.innerText = "Kevin: let's play Fifa."
-        let button = document.createElement('button')
-        button.innerText = "Play Fifa"
-        button.addEventListener('click', () => {
+        message.innerText = "Kevin and Luis: let's play some games."
+        let button1 = document.createElement('button')
+        button1.innerText = "Play Fifa with Kevin"
+        button1.addEventListener('click', () => {
             message.innerText = this.building.playFifaWKevin()
         })
-        this.container.append(message, button, this.leaveButton())
-    }
-
-
-    // Vidhi's lesson
-    renderVidhiLesson() {
-        let message = document.createElement('p')
-        message.innerText = "Vidhi: OK, it's time to start learning."
-        let button = document.createElement('button')
-        button.innerText = "Take the lesson"
-        button.addEventListener('click', () => {
-            message.innerText = this.building.learnSEWVidhi()
+        let button2 = document.createElement('button')
+        button2.innerText = "Play pokemon with Luis"
+        button2.addEventListener('click', () => {
+            message.innerText = this.building.playPokemonWLuis()
         })
-        this.container.append(message, button, this.leaveButton())
-    }
-
-    // Scott's attendance
-    renderScottAttendance() {
-        let message = document.createElement('p')
-        message.innerText = "Scott: 040119.forEach(student => { student.doAttendance() })"
-        let button = document.createElement('button')
-        button.innerText = "Do attendance"
-        button.addEventListener('click', () => {
-            message.innerText = this.building.learnAttendanceWScott()
-        })
-        this.container.append(message, button, this.leaveButton())
+        this.container.append(message, button1, button2, this.leaveButton())
     }
 
     renderPratikshyaStudio() {
@@ -251,6 +227,17 @@ class PopupWindow {
         this.container.append(message, button, this.leaveButton())
     }
 
+    renderBed() {
+        let sleepButton = document.createElement('button')
+        sleepButton.innerText = 'Sleep'
+        let message = document.createElement('p')
+        message.innerText = "This doesn't feel like a donut..."
+        sleepButton.addEventListener('click', () => {
+            message.innerText = this.building.sleep()
+        })
+        this.container.append(message, sleepButton, this.leaveButton())
+    }
+
 
     // leave button for each window
     leaveButton() {
@@ -260,19 +247,5 @@ class PopupWindow {
             this.popupWindow.style.display = 'none'
         })
         return leaveButton
-    }
-
-    renderBed() {
-        this.container.innerHTML = ''
-        let sleepButton = document.createElement('button')
-        let message = document.createElement('p')
-        let leaveButton = document.createElement('button')
-        sleepButton.addEventListener('click', () => {
-            message.innerText = this.building.sleep()
-        })
-        leaveButton.addEventListener('click', (e) => {
-            this.popupWindow.style.display = 'none'
-        })
-        this.container.append(sleepButton, leaveButton)
     }
 }

@@ -3,9 +3,19 @@ class Building {
         this.name = name
         this.player = player
         this.gameTimes = 0
+        this.player.events = {}
+    }
+
+    storeEvent(eventType) {
+        if (!!this.player.events[`${eventType}`]) {
+            this.player.events[`${eventType}`] += 1
+        } else {
+            this.player.events[`${eventType}`] = 1
+        }
     }
 
     weworkEvent() {
+        this.storeEvent(1)
         // debugger
         // alert('a')
         console.log('a')
@@ -15,15 +25,18 @@ class Building {
     }
 //donut shop methods
     buyDonut() {
+        this.storeEvent(2)
         this.player.gold -= 2
         this.player.happiness += 5
         this.player.health -= 5
-        this.player.minute += 60
+        this.player.timeSpent += 180
+
         return "You feel a rush of happiness. Was it worth it?"
     }
 
 //Magic Shop Methods
     buyPack() {
+        this.storeEvent(3)
         this.player.gold -= 3
         let randomNum = Math.floor((Math.random() * 10) + 1)
        
@@ -45,6 +58,7 @@ class Building {
     }
 
     buyBox() {
+        this.storeEvent(4)
         this.player.gold -= 100
         let randomNum = Math.floor((Math.random() * 10) + 1)
         if (randomNum <= 5) {
@@ -68,6 +82,7 @@ class Building {
 //ryan's lab methods
     riskyExperiment() {
         // debugger
+        this.storeEvent(5)
         this.player.gold -=1000
         let randomNum = Math.floor((Math.random() * 5) + 1)
         switch(randomNum) {
@@ -100,13 +115,13 @@ class Building {
                 this.player.health += 5
                 this.player.energy += 5
                 return "Ryan: I've made some minor improvements."
-            break
         }
     }
 
     //Charles' music shop methods
 
     musicLesson() {
+        this.storeEvent(6)
         this.player.gold -= 150
         this.player.creativity += 10
         this.player.happiness += 3
@@ -117,6 +132,7 @@ class Building {
     //Sam's club Methods
 
     getLit() {
+        this.storeEvent(7)
         this.player.gold -= 100
         this.player.coding_ability -= 2
         this.player.social += 10
@@ -126,6 +142,7 @@ class Building {
     }
 
     dialNumber() {
+        this.storeEvent(8)
         let randomNum = Math.floor((Math.random() * 5) + 1)
         let successChance = randomNum * (this.player.social/100)
 
@@ -142,6 +159,7 @@ class Building {
 //tom's soccer Wagers
 
     makeRiskyBet(bet) {
+        this.storeEvent(9)
         if (bet > this.player.gold) {
             return "Tom: Sorry..I gotta see the money upfront."
         } else {
@@ -184,6 +202,7 @@ class Building {
     }
 
     justinGymEvent() {
+        this.storeEvent(10)
         let pool = Building.possibilityPool(100)
         this.player.gold = this.player.gold - 30
         let num = Building.randomDraw(pool)
@@ -222,6 +241,7 @@ class Building {
     }
 
     nikkiBuildComputer() {
+        this.storeEvent(11)
         let event
         if (this.player.gold < 500) {
             event = "Nikki: Sorry, this is not a charity!"
@@ -234,6 +254,7 @@ class Building {
     }
 
     shawnPetStore() {
+        this.storeEvent(12)
         let pool = Building.possibilityPool(10)
         this.player.gold -= 50
         let num = Building.randomDraw(pool)
@@ -261,6 +282,7 @@ class Building {
     }
 
     playPokemonWLuis() {
+        this.storeEvent(13)
         let pool = Building.possibilityPool(10)
         let num = Building.randomDraw(pool)
         this.player.gold -= 10
@@ -289,6 +311,7 @@ class Building {
     }
 
     playFifaWKevin() {
+        this.storeEvent(14)
         let pool = Building.possibilityPool(10)
         let num = Building.randomDraw(pool)
         this.player.gold -= 10
@@ -317,6 +340,7 @@ class Building {
     }
 
     learnSEWVidhi() {
+        this.storeEvent(15)
         let event
         let pool = Building.possibilityPool(10)
         let num = Building.randomDraw(pool)
@@ -335,6 +359,7 @@ class Building {
     }
 
     learnAttendanceWScott() {
+        this.storeEvent(16)
         let event
         let pool = Building.possibilityPool(10)
         let num = Building.randomDraw(pool)
@@ -353,6 +378,7 @@ class Building {
     }
 
     danceWPratikshya() {
+        this.storeEvent(17)
         let event
         let pool = Building.possibilityPool(10)
         let num = Building.randomDraw(pool)
@@ -389,6 +415,7 @@ class Building {
     }
 
     askACigFromChris() {
+        this.storeEvent(18)
         let pool = Building.possibilityPool(10)
         let num = Building.randomDraw(pool)
         this.player.gold -= 10
@@ -411,6 +438,7 @@ class Building {
     }
 
     sleep() {
+        this.storeEvent(19)
         let pool = Building.possibilityPool(100)
         let num = Building.randomDraw(pool)
         let event
