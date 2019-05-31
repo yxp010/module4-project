@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const newChaButton = document.getElementById('create_character_button')
     const allChars = document.getElementById('all-chars')
     var config = {
-        type: Phaser.AUTO,
+        type: Phaser.AUTO,   
         width: 1920,
         height: 1080,
         physics: {

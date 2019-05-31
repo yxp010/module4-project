@@ -157,19 +157,22 @@ class Building {
 //tom's soccer Wagers
 
     makeRiskyBet(bet) {
-        let randomNum = Math.floor((Math.random() * 10) + 1)
-        if (randomNum <= 7) {
-            this.player.happiness -= 5
-            this.player.gold -= bet
-            this.showPlayerStats(this.player)
-            return "Tom: Ouch..."
+        if (bet > this.player.gold) {
+            return "Tom: Sorry..I gotta see the money upfront."
+        } else {
+            let randomNum = Math.floor((Math.random() * 10) + 1)
+            if (randomNum <= 7) {
+                this.player.happiness -= 5
+                this.player.gold -= bet
+                return "Tom: Ouch..."
+            }
+            else {
+                this.player.gold *= 5
+                this.player.happiness += 30
+                return "Tom: Nice payout"
+            }
         }
-        else {
-            this.player.gold *= 5
-            this.player.happiness += 30
-            this.showPlayerStats(this.player)
-            return "Tom: Nice payout"
-        }
+        
 
     }
 
@@ -235,11 +238,14 @@ class Building {
     }
 
     nikkiBuildComputer() {
-        this.player.gold -= 500
-        this.player.code_ability += 20
-        console.log('You got a super NickBook for your coding!')
-        let event = 'You got a super NickBook for your coding!'
-        this.showPlayerStats(this.player)
+        let event
+        if (this.player.gold < 500) {
+            event = "Nikki: Sorry, this is not a charity!"
+        } else {
+            this.player.gold -= 500
+            this.player.code_ability += 20
+            event = 'Nikki: You got a super NickBook for your coding!'
+        }
         return event
     }
 
@@ -253,22 +259,18 @@ class Building {
                 this.player.health -= 10
                 this.player.happiness = 0
                 event = 'You are scratched by a dog hair :('
-                console.log(event)
             } else {
                 this.player.happiness += 30
                 event = 'You kissed by a corgi'
-                console.log(event)
             }
         } else {
             if (num <= 1) {
                 this.player.happiness = 100
                 event = "You are the King of Corgi!"
-                console.log(event)
             } else if(num > 1 && num <= 9) {
                 this.player.happiness += 20
                 this.player.gold += 50
                 event = 'Corgi makes your day!'
-                console.log(event)
             }
         }
         this.showPlayerStats(this.player)
